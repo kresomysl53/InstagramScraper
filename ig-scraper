@@ -1,0 +1,250 @@
+#!/usr/bin/python3
+
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+import random, time
+
+number_of_posts = 100
+
+class UserSimulation():
+    def __init__(self, driver):
+        """
+            User simulation strategy for web scraping.
+            This method is used to simulate a user browsing behavior
+            by introducing random delays between requests.
+        """
+        self.driver = driver
+
+    def _random_wait(self):
+        """
+            Request timing strategy:
+
+            delay = random.triangular(2, 5, 10)
+
+            # Where:
+            # - 2 seconds    ≈ quick interactions (lower bound)
+            # - 5 seconds    ≈ moderate delay (target average)
+            # - 10 seconds   ≈ longer delay for simulating human behavior (upper bound)
+
+            Expected Delay: ~5.67 seconds
+            Expected Requests per Hour: ~635 requests/hour
+            Range:
+            Minimum: 360 requests/hour (10-second delay)
+            Maximum: 1800 requests/hour (2-second delay)
+        """
+        delay = random.triangular(2, 5, 10)
+        print(f"sleeping for {delay:.2f} seconds...")
+        time.sleep(delay)
+
+    def _random_wait_short(self):
+        """Short random wait for quick interactions."""
+        delay = random.triangular(1, 2, 3)
+        print(f"sleeping for {delay:.2f} seconds...")
+        time.sleep(delay)
+
+    def _simulate_user_behavior(self):
+        """Simulates user behavior by scrolling the page and typing text. 
+           This method can be used to mimic human interaction"""
+        scroll = random.randint(300, 900)
+        self.driver.execute_script(f"window.scrollBy(0, {scroll});")
+        time.sleep(random.uniform(1.5, 4.0))
+
+    def _human_typing(self, element, text, delay_min=0.05, delay_max=0.2):
+        for char in text:
+            element.send_keys(char)
+            time.sleep(random.uniform(delay_min, delay_max))
+    
+
+
+
+class DriverManager():
+    def __init__(self, driver_path=None):
+        self.driver_path = driver_path
+
+    def _setup(self):
+        """Sets up the Chrome WebDriver."""
+        import chromedriver_autoinstaller
+        from selenium import webdriver  # místo selenium.webdriver
+        from selenium.webdriver.chrome.options import Options
+        from selenium.webdriver.chrome.options import Options
+        from selenium.webdriver.support.ui import WebDriverWait
+
+        chromedriver_autoinstaller.install()
+
+        options = Options()
+        options.binary_location = "/usr/bin/chromium"
+        options.add_argument("--no-sandbox")
+        options.add_argument("--disable-dev-shm-usage")
+        options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36")
+        options.add_experimental_option("excludeSwitches", ["enable-automation"])
+        options.add_experimental_option('useAutomationExtension', False)
+        options.add_argument("--disable-blink-features=AutomationControlled")
+
+        self.driver = webdriver.Chrome(options=options)
+        self.wait = WebDriverWait(self.driver, timeout=5)
+        print("WebDriver initialized successfully.")
+
+        return self.driver, self.wait
+    
+class Scraper():
+    def __init__(self, driver, wait):
+        self.driver = driver
+        self.wait = wait
+        self.user_simulation = UserSimulation(self.driver)
+
+        self.selectors = {
+            "cookies"           :'button._a9--._ap36._a9_0',
+            "login_button"      :'button[type="submit"]',
+            "modal_selector"    :'article[role="presentation"][tabindex="-1"]',
+            "posts"             :'div.x1lliihq.x1n2onr6.xh8yej3.x4gyw5p.x14z9mp.xzj7kzq.xbipx2v.x1j53mea a.x16tdsg8.x1hl2dhg.xggy1nq.x1a2a7pz._a6hd[role="link"]',
+            "post_content"      :'div div div div div div._aagv img.x5yr21d.xu96u03.x10l6tqk.x13vifvy.x87ps6o.xh8yej3',
+            "post_close_button" :'div.xo2ifbc div[tabindex="0"] div.x6s0dn4.x78zum5.xdt5ytf.xl56j7k',
+            }
+
+    def _cookies(self):
+        """ handles cookies pop-up """
+        try:
+            button = self.wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, self.selectors["cookies"])))
+            button.click()
+            print("Cookies declined.")
+        except Exception as e:
+            print(f"Cookies pop-up not found or error occurred: {e}")
+
+    
+    def _login(self):
+        """ Log in to Instagram using username and password.
+            This method is used to log in to Instagram using the provided username and password.
+            It waits for the login form to be present, fills in the username and password fields,
+            and submits the form.
+        """
+
+        try:
+            username_input = wait.until(EC.presence_of_element_located((By.NAME, "username")))
+            password_input = driver.find_element(By.NAME, "password")
+            time.sleep(2.62)
+        except Exception as e:
+            print(f"Username or password input not found: {e}")
+            return
+            
+        username = "your_username"
+        password = "your_password"  
+        try:
+            self.user_simulation._human_typing(username_input, username)
+            self.user_simulation._human_typing(password_input, password)
+        except Exception as e:
+            print(f"Error typing username or password: {e}")
+            return
+
+
+        time.sleep(1.214)
+        login_button = driver.find_element(By.CSS_SELECTOR, self.selectors["login_button"])
+        login_button.click()
+        print("Login submitted.")
+        time.sleep(15)
+
+    def _cookies_firt_time_setup(self):
+        import pickle
+
+        with open("cookies.pkl", "wb") as f:
+            pickle.dump(driver.get_cookies(), f)
+
+    def _cookies_loader(self):
+        """Load cookies from a file and add them to the browser."""
+        import pickle
+
+        try:
+            with open("cookies.pkl", "rb") as f:
+                cookies = pickle.load(f)
+            for cookie in cookies:
+                time.sleep(0.22)
+                if 'sameSite' in cookie:
+                    cookie.pop('sameSite', None)
+                driver.add_cookie(cookie)
+
+            self.user_simulation._random_wait()
+            print("Cookies loaded successfully.")
+            driver.refresh()
+            self.user_simulation._random_wait()
+        except FileNotFoundError:
+            print("Cookies file not found. Please log in first.")
+
+
+    def _load_posts(self):
+        """Load all posts from the user's feed."""
+        last_height = self.driver.execute_script("return document.body.scrollHeight+11")
+        loaded_posts = 0
+        
+
+        while True:
+            self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight+35);")
+            self.user_simulation._simulate_user_behavior()
+            
+            try:
+                if loaded_posts >= number_of_posts:
+                    print(f"Loaded {loaded_posts} posts, stopping.")
+                    break
+                self.user_simulation._random_wait_short()
+                self.wait.until(lambda d: d.execute_script("return document.body.scrollHeight") > last_height)
+                last_height = self.driver.execute_script("return document.body.scrollHeight")
+                loaded_posts += 18
+            except:
+                break
+        print("All posts loaded.")
+        self.driver.execute_script("window.scrollTo(0, 0);")
+
+
+    def _save_posts(self):
+        """Save posts to a file."""
+        posts       = driver.find_elements(By.CSS_SELECTOR, self.selectors["posts"])
+        visited     = set()
+        print(f"Found {len(posts)} posts.")
+
+
+        for i, post in enumerate(posts):           
+            try:
+                if post in visited:
+                    continue
+                visited.add(post)
+
+                driver.execute_script("arguments[0].scrollIntoView();", post)
+                self.user_simulation._random_wait_short()
+                post.click()
+                time.sleep(3)
+
+                #now we are in modal with post content
+                modal = self.wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, self.selectors["modal_selector"])))
+                print("Modal opened.")
+                self.wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, self.selectors["post_content"])))
+                print("Post content loaded.")
+
+                try:
+                    img = modal.find_element(By.CSS_SELECTOR, self.selectors["post_content"])
+                    self.user_simulation._random_wait_short()
+                    content_url = img.get_attribute("src")
+                    with open("links.txt", "a") as f:
+                        f.write(content_url + "\n")
+                    print(f"Post n. {i} saved to links.txt")
+                except Exception as e:
+                    print(f"Error finding post content: {e}")
+                    
+                close_btn = self.driver.find_element(By.CSS_SELECTOR, self.selectors["post_close_button"])
+                close_btn.click()
+                self.user_simulation._random_wait_short()
+                #end of modal
+            except Exception as e:
+                print(f"error in post n. {i}: {e}")
+                continue
+
+
+if __name__ == "__main__":
+
+    site = "https://www.instagram.com/sues_stories/?hl=cs"
+
+    driver, wait = DriverManager()._setup()
+
+    driver.get(site)
+    time.sleep(5)
+
+    human = UserSimulation(driver)
+    scraper = Scraper(driver, wait)
+
