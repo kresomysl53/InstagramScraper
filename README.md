@@ -6,7 +6,7 @@
 [![Selenium](https://img.shields.io/badge/Selenium-WebDriver-green.svg)](https://selenium.dev)
 [![License](https://img.shields.io/badge/License-Educational-orange.svg)](#)
 
-### Currently used for posts only
+### Currently used for posts only 
 
 ## ✨ Features
 
