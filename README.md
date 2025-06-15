@@ -1,6 +1,6 @@
 # 📸 Instagram Profile Scraper
 
-> A sophisticated, human-like Instagram content extraction tool built with Python and Selenium
+> Human-like Instagram content extraction tool built with Python and Selenium
 
 [![Python](https://img.shields.io/badge/Python-3.7+-blue.svg)](https://python.org)
 [![Selenium](https://img.shields.io/badge/Selenium-WebDriver-green.svg)](https://selenium.dev)
@@ -53,27 +53,6 @@ Requests per Hour = 3600 / 5.67 ≈ 635 requests/hour
 - **Minimum Delay (10 seconds)**: 360 requests/hour
 - **Maximum Delay (2 seconds)**: 1800 requests/hour
 
-### Post Extraction Limit
-```python
-number_of_posts = 100  # Adjust as needed
-```
-
-### Browser Settings
-- **Binary**: `/usr/bin/chromium`
-- **Flags**: `--no-sandbox`, `--disable-dev-shm-usage`
-- **User Agent**: Windows Chrome 114 spoofing
-
-## 📁 Project Structure
-
-```
-├── scraper.py              # Main scraping logic
-├── cookies.pkl             # Session persistence
-├── links.txt              # Extracted image URLs
-└── page_source*.html      # Debug snapshots
-```
-
-## 🔍 Technical Deep Dive
-
 ### Modal Handling Strategy
 The scraper implements a sophisticated modal management system:
 - **State verification** before each interaction
@@ -106,4 +85,6 @@ Mimics authentic browsing patterns through:
 - **Detection Rate**: <2% with anti-detection measures
 
 
-<sub>Built on Earth, by Earth 🌍</sub>
+<p align="center">
+  **Built on Earth, by Earth 🌍**
+</p>
