@@ -39,6 +39,10 @@ def download_images(input="links.txt", dest_folder="images"):
         with open(filename, "wb") as f:
              f.write(response.content)
 
+def filter(img):
+    import cv2
+    import numpy as np
+
 def OCR():
     import pytesseract
     from PIL import Image
@@ -68,5 +72,4 @@ def OCR():
     
 
     
-download_images()
-
+OCR()
