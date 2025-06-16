@@ -10,28 +10,37 @@
 
 ## ✨ Features
 
-### 🔐 **Authentication & Session Management**
-- **Cookie-based persistence** - Save and restore login sessions across runs
-- **Human typing simulation** - Natural keystroke delays to mimic real users
-- **Automated credential handling** with secure login flow
+# 📸 Instagram Profile Scraper
+> Human-like Instagram content extractor built with Python and Selenium
 
-### 🎭 **Anti-Detection Arsenal**
-- **Human-like behavior patterns** with randomized delays and scrolling
-- **Non-headless operation** for maximum stealth and reduced detection risk
-- **User-agent spoofing** and automation flag removal
-- **Triangular delay distribution** (2-10s) simulating natural browsing rhythm
+[![Python](https://img.shields.io/badge/Python-3.7+-blue.svg)](https://python.org)
+[![Selenium](https://img.shields.io/badge/Selenium-WebDriver-green.svg)](https://selenium.dev)
+[![License](https://img.shields.io/badge/License-Educational-orange.svg)](#)
 
-### 📊 **Smart Data Extraction**
-- **Duplicate detection** via URL fingerprinting
-- **Progressive loading** with scroll-based content discovery
-- **Image source extraction** from Instagram's CDN
-- **Structured output** to text files for further processing
+**Currently supports post extraction only**
 
-### 🎯 **Precision Targeting**
-- **CSS selector optimization** for Instagram's dynamic DOM
-- **Modal content isolation** within presentation contexts
-- **Element visibility verification** before interaction
-- **Scroll-into-view positioning** for reliable clicking
+## ✨ Features
+
+### Authentication & Session Management
+- Cookie-based session persistence for login reuse  
+- Human typing simulation with natural delays  
+- Secure credential handling  
+
+### Anti-Detection Techniques
+- Randomized delays and scroll behavior  
+- Non-headless browser mode for stealth  
+- Automation flag removal and fingerprint masking  
+
+### Data Extraction
+- Duplicate detection to avoid repeated content  
+- Progressive scrolling to load posts dynamically  
+- Extraction of image URLs from Instagram CDN  
+- Structured output for easy post-processing  
+
+## ⚠️ Ethical Usage Notice
+- Respects Instagram's terms of service and rate limits  
+- Uses natural browsing patterns and authentic browser signatures  
+- Designed for research and educational purposes only  
 
 ### Timing Parameters & Performance Metrics
 
@@ -67,23 +76,14 @@ Mimics authentic browsing patterns through:
 - **Character-by-character typing** with micro-delays
 - **Random viewport interactions**
 
-### Data Integrity
-- **URL deduplication** prevents processing same content
-- **Source validation** ensures image URLs are accessible
-- **Error isolation** continues processing despite individual failures
-- **Progress logging** for monitoring extraction status
-
-## ⚠️ Not intended for:**misuse or activities that harm Instagram.
-
 ## 📈 Performance Summary
 
 - **Expected Delay**: ~5.67 seconds
 - **Expected Requests per Hour**: ~635 requests/hour
 - **Range**: 360-1800 requests/hour (depending on delay variance)
-- **Success Rate**: >95% with proper session management
-- **Memory Usage**: ~150MB typical operation
-- **Detection Rate**: <2% with anti-detection measures
+- **Success Rate**: >99% with proper session management (got blocked only once from start without session handling)
 
+## ⚠️ Not intended for:**misuse or activities that harm Instagram.
 
 <p align="center">
   <strong>Built on Earth, by Earth 🌍</strong>
