@@ -86,5 +86,5 @@ Mimics authentic browsing patterns through:
 
 
 <p align="center">
-  **Built on Earth, by Earth 🌍**
+  <strong>Built on Earth, by Earth 🌍</strong>
 </p>

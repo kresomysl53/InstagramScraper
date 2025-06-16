@@ -1,0 +1,11 @@
+diff --git a/README.md b/README.md
+index 03ec84a..b291092 100644
+--- a/README.md
++++ b/README.md
+@@ -86,5 +86,5 @@ Mimics authentic browsing patterns through:
+ 
+ 
+ <p align="center">
+-  **Built on Earth, by Earth 🌍**
++  <strong>Built on Earth, by Earth 🌍</strong>
+ </p>
