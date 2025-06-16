@@ -1,16 +1,4 @@
 # 📸 Instagram Profile Scraper
-
-> Human-like Instagram content extraction tool built with Python and Selenium
-
-[![Python](https://img.shields.io/badge/Python-3.7+-blue.svg)](https://python.org)
-[![Selenium](https://img.shields.io/badge/Selenium-WebDriver-green.svg)](https://selenium.dev)
-[![License](https://img.shields.io/badge/License-Educational-orange.svg)](#)
-
-### Currently used for posts only 
-
-## ✨ Features
-
-# 📸 Instagram Profile Scraper
 > Human-like Instagram content extractor built with Python and Selenium
 
 [![Python](https://img.shields.io/badge/Python-3.7+-blue.svg)](https://python.org)
@@ -83,7 +71,7 @@ Mimics authentic browsing patterns through:
 - **Range**: 360-1800 requests/hour (depending on delay variance)
 - **Success Rate**: >99% with proper session management (got blocked only once from start without session handling)
 
-## ⚠️ Not intended for:**misuse or activities that harm Instagram.
+## ⚠️ Not intended for: misuse or activities that harm Instagram.
 
 <p align="center">
   <strong>Built on Earth, by Earth 🌍</strong>
